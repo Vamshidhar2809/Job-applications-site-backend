@@ -1,14 +1,22 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const applicantRoutes = require('./routes/applicantroutes');
+require('dotenv').config();
+const applicantRoutes = require('./routes/applicantRoutes');
 
-app.use(cors());
+// Enable CORS for Netlify frontend
+app.use(cors({
+  origin: 'https://my-job-application-site.netlify.app',
+  methods: ['POST', 'GET'],
+  credentials: true
+}));
+
+// Middlewares
 app.use(express.json());
+app.use('/apply', applicantRoutes);
 
-app.use('/api/applicants', applicantRoutes);
-
-const PORT = process.env.PORT || 5000;
+// Start server
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
