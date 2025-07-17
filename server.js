@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 require('dotenv').config();
-const applicantRoutes = require('./routes/applicantRoutes');
+const applicantRoutes = require('./routes/applicantroutes');
 
 // Enable CORS for Netlify frontend
 app.use(cors({
